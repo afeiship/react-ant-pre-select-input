@@ -64,11 +64,11 @@ export default class extends Component{
     const { className, onChange, items, value, ...props } = this.props;
     return (
       <Input
-      addonBefore={this.selectView}
-      value={value[1]}
-      onChange={this._onChange.bind(this,1)}
-      className={classNames('react-ant-pre-select-input', className)}
-      {...props} />
+        addonBefore={this.selectView}
+        value={value[1]}
+        onChange={this._onChange.bind(this,1)}
+        className={classNames('react-ant-pre-select-input', className)}
+        {...props} />
     );
   }
 }
