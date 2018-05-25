@@ -1,6 +1,6 @@
 import './dev.scss';
 import ReactAntPreSelectInput from './main';
-
+import { Input } from 'antd';
 /*===example start===*/
 
 // install: npm install afeiship/react-ant-pre-select-input --save
@@ -18,7 +18,7 @@ class App extends React.Component{
         label: 'https'
       }
     ],
-    value:['1','a']
+    value:['1','www.baidu.com']
   };
 
   constructor(props){
@@ -37,7 +37,10 @@ class App extends React.Component{
     const { value } = this.state;
     return (
       <div className="hello-react-ant-pre-select-input">
-        <ReactAntPreSelectInput items={this.state.items} value={value} onChange={this._onChange} ref='rc' />
+        <ReactAntPreSelectInput
+          Component={Input.Search}
+          enterButton
+          items={this.state.items} value={value} onChange={this._onChange} ref='rc' />
       </div>
     );
   }

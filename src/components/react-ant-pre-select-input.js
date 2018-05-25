@@ -14,12 +14,14 @@ export default class extends Component{
     items: PropTypes.array,
     value: PropTypes.array,
     onChange: PropTypes.func,
+    Component: PropTypes.func
   };
 
   static defaultProps = {
     items: [],
     value: [],
-    onChange: noop
+    onChange: noop,
+    Component: Input
   };
   /*===properties end===*/
 
@@ -61,9 +63,9 @@ export default class extends Component{
   };
 
   render(){
-    const { className, onChange, items, value, ...props } = this.props;
+    const { className, onChange, Component, items, value, ...props } = this.props;
     return (
-      <Input
+      <Component
         addonBefore={this.selectView}
         value={value[1]}
         onChange={this._onChange.bind(this,1)}
