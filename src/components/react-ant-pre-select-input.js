@@ -1,11 +1,11 @@
 import React,{ Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import noop from 'noop';
-import objectAssign from 'object-assign';
 import { Input } from 'antd';
 import ReactAntSelect from 'react-ant-select';
+import nx from 'next-js-core2';
+
 
 export default class extends Component{
   /*===properties start===*/
@@ -14,14 +14,16 @@ export default class extends Component{
     items: PropTypes.array,
     value: PropTypes.array,
     onChange: PropTypes.func,
-    Component: PropTypes.func
+    eventValue: PropTypes.func,
+    Component: PropTypes.func,
   };
 
   static defaultProps = {
     items: [],
     value: [],
     onChange: noop,
-    Component: Input
+    Component: Input,
+    eventValue: nx.returnValue
   };
   /*===properties end===*/
 
@@ -53,17 +55,17 @@ export default class extends Component{
 
   _onChange = (inIndex, inEvent) => {
     const { value} = this.props;
-    const { onChange } = this.props;
+    const { onChange, eventValue } = this.props;
     value[inIndex] = inEvent.target.value;
     this.setState({ value },()=>{
       onChange({
-        target: { value }
+        target: { value: eventValue(value) }
       });
     });
   };
 
   render(){
-    const { className, onChange, Component, items, value, ...props } = this.props;
+    const { className, onChange, Component, eventValue, items, value, ...props } = this.props;
     return (
       <Component
         addonBefore={this.selectView}

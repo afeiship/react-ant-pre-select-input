@@ -86,11 +86,12 @@
     "classnames": "^2.2.5",
     "mixin-decorator": "github:afeiship/mixin-decorator",
     "next-dom-event": "github:afeiship/next-dom-event",
+    "next-js-core2": "github:afeiship/next-js-core2",
     "noop": "github:afeiship/noop",
     "object-assign": "^4.1.1",
     "prop-types": "^15.5.10",
-    "react": "^15.4.2",
+    "react": "*",
     "react-ant-select": "github:afeiship/react-ant-select",
-    "react-dom": "^15.4.2"
+    "react-dom": "*"
   }
 }

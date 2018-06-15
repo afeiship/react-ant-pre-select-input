@@ -10,15 +10,15 @@ class App extends React.Component{
   state = {
     items:[
       {
-        value: '1',
-        label: 'http'
+        value: 'http',
+        label: 'http://'
       },
       {
-        value: '2',
-        label: 'https'
+        value: 'https',
+        label: 'https://'
       }
     ],
-    value:['1','www.baidu.com']
+    value:['http','www.baidu.com']
   };
 
   constructor(props){
@@ -33,6 +33,13 @@ class App extends React.Component{
     // this.setState({ value: e.target.value });
   };
 
+  eventValue = e =>{
+    return {
+      [e[0]]:e[1]
+    };
+  };
+
+
   render(){
     const { value } = this.state;
     return (
@@ -40,6 +47,7 @@ class App extends React.Component{
         <ReactAntPreSelectInput
           Component={Input.Search}
           enterButton
+          eventValue={this.eventValue}
           items={this.state.items} value={value} onChange={this._onChange} ref='rc' />
       </div>
     );
