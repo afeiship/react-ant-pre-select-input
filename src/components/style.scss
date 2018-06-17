@@ -2,6 +2,9 @@ $react-ant-pre-select-input-options:(
 
 )!default;
 
-.react-ant-pre-select-input{
-  display: flex;
+
+.react-ant-pre-select-input {
+  &.ant-input-affix-wrapper {
+    display: flex;
+  }
 }
