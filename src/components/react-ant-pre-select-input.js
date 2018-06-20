@@ -67,17 +67,18 @@ export default class extends Component {
     });
   };
 
-
-
   render() {
     const { className, onChange, onClear, Component, eventValue, items, value, ...props } = this.props;
+    const noOnClear = Component === Input || Component === Input.Search;
+    const onClearProps = noOnClear ? null : { onClear: this._onChange.bind(this, 1) };
+
     return (
       <Component
         addonBefore={this.selectView}
         value={value[1]}
         onChange={this._onChange.bind(this, 1)}
-        onClear={this._onChange.bind(this, 1)}
         className={classNames('react-ant-pre-select-input', className)}
+        {...onClearProps}
         {...props} />
     );
   }
