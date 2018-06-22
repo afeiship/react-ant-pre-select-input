@@ -69,7 +69,7 @@ export default class extends Component {
     const { value } = this.props;
     const { onClear, onChange, eventValue } = this.props;
     value[inIndex] = inEvent.target.value;
-    inIndex === 0 && this.setEmpty();
+    !inIndex && this.setEmpty();
     this.setState({ value }, () => {
       onChange({
         target: { value: eventValue(value) }

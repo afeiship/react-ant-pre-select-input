@@ -1,6 +1,6 @@
 import './dev.scss';
 import ReactAntPreSelectInput from './main';
-import { Input } from 'antd';
+import { Input,Switch } from 'antd';
 /*===example start===*/
 
 // install: npm install afeiship/react-ant-pre-select-input --save
@@ -8,6 +8,7 @@ import { Input } from 'antd';
 
 class App extends React.Component{
   state = {
+    checked:false,
     items:[
       {
         value: 'http',
@@ -33,6 +34,11 @@ class App extends React.Component{
     // this.setState({ value: e.target.value });
   };
 
+  _onChange2 = checked =>{
+    console.log(checked);
+    this.setState({ checked });
+  };
+
   eventValue = e =>{
     return {
       [e[0]]:e[1]
@@ -41,15 +47,21 @@ class App extends React.Component{
 
 
   render(){
-    const { value } = this.state;
+    const { checked, value } = this.state;
     return (
       <div className="hello-react-ant-pre-select-input">
+        <label>
+          <span>是否清除输入框内容：</span>
+          <Switch style={{ marginBottom: 10 }} value={checked} onChange={this._onChange2} />
+        </label>
         <ReactAntPreSelectInput
           Component={Input.Search}
           enterButton
-          emptyWhenChange
+          emptyWhenChange={checked}
           eventValue={this.eventValue}
-          items={this.state.items} value={value} onChange={this._onChange} ref='rc' />
+          items={this.state.items}
+          value={value}
+          onChange={this._onChange} ref='rc' />
       </div>
     );
   }
