@@ -6,6 +6,7 @@ import { Input } from 'antd';
 import ReactAntSelect from 'react-ant-select';
 import nx from 'next-js-core2';
 
+const EMPTY_STR = '';
 
 export default class extends Component {
   /*===properties start===*/
@@ -13,6 +14,7 @@ export default class extends Component {
     className: PropTypes.string,
     items: PropTypes.array,
     value: PropTypes.array,
+    emptyWhenChange: PropTypes.bool,
     onChange: PropTypes.func,
     onClear: PropTypes.func,
     eventValue: PropTypes.func,
@@ -25,6 +27,7 @@ export default class extends Component {
     onChange: noop,
     onClear: noop,
     Component: Input,
+    emptyWhenChange: false,
     eventValue: nx.returnValue
   };
   /*===properties end===*/
@@ -55,10 +58,17 @@ export default class extends Component {
     );
   }
 
+  setEmpty() {
+    const { emptyWhenChange } = this.props;
+    const { value } = this.state;
+    emptyWhenChange && (value[1] = EMPTY_STR);
+  }
+
   _onChange = (inIndex, inEvent) => {
     const { value } = this.props;
     const { onClear, onChange, eventValue } = this.props;
     value[inIndex] = inEvent.target.value;
+    inIndex === 0 && this.setEmpty();
     this.setState({ value }, () => {
       onChange({
         target: { value: eventValue(value) }
@@ -68,7 +78,7 @@ export default class extends Component {
   };
 
   render() {
-    const { className, onChange, onClear, Component, eventValue, items, value, ...props } = this.props;
+    const { className, onChange, onClear, Component, eventValue, items, value, emptyWhenChange, ...props } = this.props;
     const noOnClear = Component === Input || Component === Input.Search;
     const onClearProps = noOnClear ? null : { onClear: this._onChange.bind(this, 1) };
 

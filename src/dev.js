@@ -47,6 +47,7 @@ class App extends React.Component{
         <ReactAntPreSelectInput
           Component={Input.Search}
           enterButton
+          emptyWhenChange
           eventValue={this.eventValue}
           items={this.state.items} value={value} onChange={this._onChange} ref='rc' />
       </div>
