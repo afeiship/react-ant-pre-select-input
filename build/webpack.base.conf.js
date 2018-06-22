@@ -17,7 +17,6 @@ var externals = process.env.NODE_ENV === 'production' ? {
   'noop':'noop',
   'antd':'antd',
   'next-return-event':'next-return-event',
-  'next-js-core2':'next-js-core2',
   'react-ant-select':'react-ant-select',
   'mixin-decorator': 'mixin-decorator',
   'prop-types':'prop-types',
