@@ -60,8 +60,9 @@ export default class extends Component {
 
   setEmpty() {
     const { emptyWhenChange } = this.props;
-    const { value } = this.state;
-    emptyWhenChange && (value[1] = EMPTY_STR);
+    if(emptyWhenChange){
+      this.state.value[1] = EMPTY_STR;
+    }
   }
 
   _onChange = (inIndex, inEvent) => {
