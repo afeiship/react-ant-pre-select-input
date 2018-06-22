@@ -8,13 +8,21 @@
     className: PropTypes.string,
     items: PropTypes.array,
     value: PropTypes.array,
+    emptyWhenChange: PropTypes.bool,
     onChange: PropTypes.func,
+    onClear: PropTypes.func,
+    eventValue: PropTypes.func,
+    Component: PropTypes.func,
   };
 
   static defaultProps = {
     items: [],
     value: [],
-    onChange: noop
+    onChange: noop,
+    onClear: noop,
+    Component: Input,
+    emptyWhenChange: false,
+    eventValue: nx.returnValue
   };
   
 ```
@@ -47,15 +55,15 @@ class App extends React.Component{
   state = {
     items:[
       {
-        value: '1',
-        label: 'http'
+        value: 'http',
+        label: 'http://'
       },
       {
-        value: '2',
-        label: 'https'
+        value: 'https',
+        label: 'https://'
       }
     ],
-    value:['1','a']
+    value:['http','www.baidu.com']
   };
 
   constructor(props){
@@ -70,11 +78,23 @@ class App extends React.Component{
     // this.setState({ value: e.target.value });
   };
 
+  eventValue = e =>{
+    return {
+      [e[0]]:e[1]
+    };
+  };
+
+
   render(){
     const { value } = this.state;
     return (
       <div className="hello-react-ant-pre-select-input">
-        <ReactAntPreSelectInput items={this.state.items} value={value} onChange={this._onChange} ref='rc' />
+        <ReactAntPreSelectInput
+          Component={Input.Search}
+          enterButton
+          emptyWhenChange
+          eventValue={this.eventValue}
+          items={this.state.items} value={value} onChange={this._onChange} ref='rc' />
       </div>
     );
   }
