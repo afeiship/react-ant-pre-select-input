@@ -50,14 +50,9 @@ class App extends React.Component{
     const { checked, value } = this.state;
     return (
       <div className="hello-react-ant-pre-select-input">
-        <label>
-          <span>是否清除输入框内容：</span>
-          <Switch style={{ marginBottom: 10 }} value={checked} onChange={this._onChange2} />
-        </label>
         <ReactAntPreSelectInput
           Component={Input.Search}
           enterButton
-          emptyWhenChange={checked}
           eventValue={this.eventValue}
           items={this.state.items}
           value={value}

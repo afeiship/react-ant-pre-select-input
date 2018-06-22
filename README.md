@@ -8,10 +8,8 @@
     className: PropTypes.string,
     items: PropTypes.array,
     value: PropTypes.array,
-    emptyWhenChange: PropTypes.bool,
     onChange: PropTypes.func,
     onClear: PropTypes.func,
-    eventValue: PropTypes.func,
     Component: PropTypes.func,
   };
 
@@ -21,8 +19,6 @@
     onChange: noop,
     onClear: noop,
     Component: Input,
-    emptyWhenChange: false,
-    eventValue: nx.returnValue
   };
   
 ```
@@ -53,6 +49,7 @@ $react-ant-pre-select-input-options:(
 
 class App extends React.Component{
   state = {
+    checked:false,
     items:[
       {
         value: 'http',
@@ -78,6 +75,11 @@ class App extends React.Component{
     // this.setState({ value: e.target.value });
   };
 
+  _onChange2 = checked =>{
+    console.log(checked);
+    this.setState({ checked });
+  };
+
   eventValue = e =>{
     return {
       [e[0]]:e[1]
@@ -86,15 +88,16 @@ class App extends React.Component{
 
 
   render(){
-    const { value } = this.state;
+    const { checked, value } = this.state;
     return (
       <div className="hello-react-ant-pre-select-input">
         <ReactAntPreSelectInput
           Component={Input.Search}
           enterButton
-          emptyWhenChange
           eventValue={this.eventValue}
-          items={this.state.items} value={value} onChange={this._onChange} ref='rc' />
+          items={this.state.items}
+          value={value}
+          onChange={this._onChange} ref='rc' />
       </div>
     );
   }
