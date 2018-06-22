@@ -5,7 +5,7 @@ import noop from 'noop';
 import { Input } from 'antd';
 import ReactAntSelect from 'react-ant-select';
 import nx from 'next-js-core2';
-
+import { returnEventTarget } from 'next-return-event';
 const EMPTY_STR = '';
 
 export default class extends Component {
@@ -17,7 +17,6 @@ export default class extends Component {
     emptyWhenChange: PropTypes.bool,
     onChange: PropTypes.func,
     onClear: PropTypes.func,
-    eventValue: PropTypes.func,
     Component: PropTypes.func,
   };
 
@@ -27,8 +26,7 @@ export default class extends Component {
     onChange: noop,
     onClear: noop,
     Component: Input,
-    emptyWhenChange: false,
-    eventValue: nx.returnValue
+    emptyWhenChange: false
   };
   /*===properties end===*/
 
@@ -53,41 +51,45 @@ export default class extends Component {
         items={items}
         style={{ width: 120 }}
         value={[value[0]]}
-        onChange={this._onChange.bind(this, 0)}
+        onChange={this._onSelectChange}
       />
     );
   }
 
-  setEmpty() {
-    const { emptyWhenChange } = this.props;
-    if(emptyWhenChange){
-      this.state.value[1] = EMPTY_STR;
-    }
+  change(inValue) {
+    const { value } = this.props;
+    const { onClear, onChange } = this.props;
+    this.setState({ value }, () => {
+      onChange(returnEventTarget(value));
+      !inValue && onClear();
+    });
   }
 
-  _onChange = (inIndex, inEvent) => {
+  _onSelectChange = inEvent => {
+    const { value, emptyWhenChange } = this.props;
+    const _value = inEvent.target.value;
+    value[0] = _value;
+    emptyWhenChange && (this.state.value[1] = EMPTY_STR);
+    this.change(_value);
+  };
+
+  _onInputChange = inEvent => {
     const { value } = this.props;
-    const { onClear, onChange, eventValue } = this.props;
-    value[inIndex] = inEvent.target.value;
-    !inIndex && this.setEmpty();
-    this.setState({ value }, () => {
-      onChange({
-        target: { value: eventValue(value) }
-      });
-      !value[inIndex] && onClear();
-    });
+    const _value = inEvent.target.value;
+    value[1] = _value;
+    this.change(_value);
   };
 
   render() {
     const { className, onChange, onClear, Component, eventValue, items, value, emptyWhenChange, ...props } = this.props;
     const noOnClear = Component === Input || Component === Input.Search;
-    const onClearProps = noOnClear ? null : { onClear: this._onChange.bind(this, 1) };
+    const onClearProps = noOnClear ? null : { onClear: this._onInputChange };
 
     return (
       <Component
         addonBefore={this.selectView}
         value={value[1]}
-        onChange={this._onChange.bind(this, 1)}
+        onChange={this._onInputChange}
         className={classNames('react-ant-pre-select-input', className)}
         {...onClearProps}
         {...props} />
