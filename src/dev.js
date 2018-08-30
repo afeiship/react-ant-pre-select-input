@@ -39,13 +39,6 @@ class App extends React.Component{
     this.setState({ checked });
   };
 
-  eventValue = e =>{
-    return {
-      [e[0]]:e[1]
-    };
-  };
-
-
   render(){
     const { checked, value } = this.state;
     return (
@@ -53,7 +46,6 @@ class App extends React.Component{
         <ReactAntPreSelectInput
           Component={Input.Search}
           enterButton
-          eventValue={this.eventValue}
           items={this.state.items}
           value={value}
           onChange={this._onChange} ref='rc' />
