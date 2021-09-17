@@ -14,37 +14,21 @@ npm install -S @jswork/react-ant-pre-select-input
 ## usage
 1. import css
   ```scss
-  @import "~@jswork/boilerplate-react-component/dist/style.css";
+  @import "~@jswork/react-ant-pre-select-input/dist/style.css";
 
   // or use sass
-  @import "~@jswork/boilerplate-react-component/dist/style.scss";
+  @import "~@jswork/react-ant-pre-select-input/dist/style.scss";
 
   // customize your styles:
-  $boilerplate-react-component-options: ()
+  $react-ant-pre-select-input-options: ()
   ```
 2. import js
   ```js
-  import React from 'react';
-  import ReactAntPreSelectInput from '@jswork/boilerplate-react-component';
-  import styled from 'styled-components';
-
-  const Container = styled.div`
-    width: 80%;
-    margin: 30px auto 0;
-  `;
-
-  export default (props: any) => {
-    return (
-      <Container>
-        <ReactAntPreSelectInput />
-      </Container>
-    );
-  };
-
+__GENERATE_DAPP__
   ```
 
 ## preview
-- https://afeiship.github.io/boilerplate-react-component/
+- https://afeiship.github.io/react-ant-pre-select-input/
 
 ## license
 Code released under [the MIT license](https://github.com/afeiship/react-ant-pre-select-input/blob/master/LICENSE.txt).
