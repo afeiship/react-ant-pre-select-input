@@ -14,18 +14,18 @@ npm install -S @jswork/react-ant-pre-select-input
 ## usage
 1. import css
   ```scss
-  @import "~@jswork/boilerplate-react-component/dist/style.css";
+  @import "~@jswork/react-ant-pre-select-input/dist/style.css";
 
   // or use sass
-  @import "~@jswork/boilerplate-react-component/dist/style.scss";
+  @import "~@jswork/react-ant-pre-select-input/dist/style.scss";
 
   // customize your styles:
-  $boilerplate-react-component-options: ()
+  $react-ant-pre-select-input-options: ()
   ```
 2. import js
   ```js
   import React from 'react';
-  import ReactAntPreSelectInput from '@jswork/boilerplate-react-component';
+  import ReactAntPreSelectInput from '@jswork/react-ant-pre-select-input';
   import styled from 'styled-components';
 
   const Container = styled.div`
@@ -33,10 +33,25 @@ npm install -S @jswork/react-ant-pre-select-input
     margin: 30px auto 0;
   `;
 
+  const items = [
+    { value: 'course', label: '按课程' },
+    { value: 'serise', label: '按课程系列' },
+    { value: 'other', label: '其它' }
+  ];
+
   export default (props: any) => {
     return (
       <Container>
-        <ReactAntPreSelectInput />
+        <ReactAntPreSelectInput
+          items={items}
+          searchable
+          onChange={(e) => {
+            console.log('change: ', e.target.value);
+          }}
+          onSearch={(e) => {
+            console.log('search: ', e.target.value);
+          }}
+        />
       </Container>
     );
   };
@@ -44,7 +59,7 @@ npm install -S @jswork/react-ant-pre-select-input
   ```
 
 ## preview
-- https://afeiship.github.io/boilerplate-react-component/
+- https://afeiship.github.io/react-ant-pre-select-input/
 
 ## license
 Code released under [the MIT license](https://github.com/afeiship/react-ant-pre-select-input/blob/master/LICENSE.txt).
